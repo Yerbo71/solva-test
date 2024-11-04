@@ -1,38 +1,39 @@
 import Header from '../../widgets/header';
-import { Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Pagination, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import FetchList from '../../features/api';
+import ItemCard from '../../shared/itemCard';
 
 const Main = () => {
   const { items, page, totalPages, setPage, error, loading } = FetchList({ type: 'people' });
   const { enqueueSnackbar } = useSnackbar();
+  if (error) return enqueueSnackbar(error, { variant: 'error' });
+  if (loading) return <CircularProgress />;
   return (
     <>
       <Header />
-      <Box>
-        <Typography variant="h3">People List</Typography>
-        <ul>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        paddingY={2}
+        gap="15px"
+      >
+        <Typography variant="h4">People List</Typography>
+        <Box display="flex" gap="15px" flexWrap="wrap" alignItems="center" justifyContent="center">
           {items.map((person, index) => (
-            <li key={index}>
-              {person.name} - {person.height} cm
-            </li>
+            <ItemCard key={`person-${index}`} data={person} />
           ))}
-        </ul>
-        <div>
-          <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
-            Previous
-          </button>
-          <span>
-            {' '}
-            Page {page} of {totalPages}{' '}
-          </span>
-          <button
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={page === totalPages}
-          >
-            Next
-          </button>
-        </div>
+        </Box>
+        <Pagination
+          count={totalPages}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          color="primary"
+          variant="outlined"
+          shape="rounded"
+        />
       </Box>
     </>
   );

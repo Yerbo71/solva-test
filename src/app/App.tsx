@@ -10,6 +10,7 @@ import Starship from '../pages/starship';
 import { SnackbarProvider } from 'notistack';
 import { Container } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import EntityPage from '../pages/entityPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/planets" element={<Planet />} />
                 <Route path="/starships" element={<Starship />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/:type/:id" element={<EntityPage />} />
               </Routes>
             </BrowserRouter>
           </Container>

@@ -1,34 +1,11 @@
 import { useState } from 'react';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
+import { FetchListData, FetchListProps } from './types.ts';
 
-interface Person {
-  name: string;
-  height: string;
-  mass: string;
-  gender: string;
-  url: string;
-}
-
-interface Planet {
-  name: string;
-  diameter: string;
-  climate: string;
-  gravity: string;
-  population: string;
-}
-
-interface Starship {
-  name: string;
-  model: string;
-  manufacturer: string;
-  cost_in_credits: string;
-}
-
-interface FetchListProps {
-  type: 'people' | 'planets' | 'starships';
-}
-
-const fetchItems = async (type: string, page: number) => {
+const fetchItems = async <T extends 'people' | 'planets' | 'starships'>(
+  type: T,
+  page: number,
+): Promise<{ results: FetchListData<T>; count: number }> => {
   const response = await fetch(`https://swapi.dev/api/${type}/?page=${page}`);
   if (!response.ok) {
     throw new Error('Ошибка при загрузке данных');
@@ -36,16 +13,16 @@ const fetchItems = async (type: string, page: number) => {
   return response.json();
 };
 
-const FetchList = ({ type }: FetchListProps) => {
+const FetchList = <T extends 'people' | 'planets' | 'starships'>({ type }: FetchListProps<T>) => {
   const [page, setPage] = useState(1);
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: [('items', type, page)],
+    queryKey: ['items', type, page],
     queryFn: () => fetchItems(type, page),
-    placeholderData: keepPreviousData,
+    keepPreviousData: true,
   });
 
-  const items = data?.results || [];
+  const items: FetchListData<T> = data?.results || [];
   const totalPages = data ? Math.ceil(data.count / 10) : 0;
 
   return {
