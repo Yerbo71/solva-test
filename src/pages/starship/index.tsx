@@ -6,7 +6,6 @@ const Starship = () => {
   return (
     <Container maxWidth="xl">
       <Header />
-      Starship
     </Container>
   );
 };

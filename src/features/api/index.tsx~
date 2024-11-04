@@ -1,0 +1,59 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface Person {
+  name: string;
+  height: string;
+  mass: string;
+  gender: string;
+  url: string;
+}
+
+interface Planet {
+  name: string;
+  diameter: string;
+  climate: string;
+  gravity: string;
+  population: string;
+}
+
+interface Starship {
+  name: string;
+  model: string;
+  manufacturer: string;
+  cost_in_credits: string;
+}
+
+interface FetchListProps {
+  type: 'people' | 'planets' | 'starships';
+}
+
+const FetchList: React.FC<FetchListProps> = ({ type }) => {
+  const [items, setItems] = useState<Person[] | Planet[] | Starship[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+
+  const fetchItems = async (page: number) => {
+    setLoading(true);
+    setError(null); // Сбрасываем ошибку перед новым запросом
+    try {
+      const response = await axios.get(`https://swapi.dev/api/${type}/?page=${page}`);
+      setItems(response.data.results);
+      setTotalPages(Math.ceil(response.data.count / 10)); // Предполагаем, что на странице 10 элементов
+    } catch (error) {
+      setError('Ошибка при загрузке данных');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchItems(page);
+  }, [page, type]);
+
+  return { items, loading, error, page, totalPages, setPage };
+};
+
+export default FetchList;

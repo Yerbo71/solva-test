@@ -1,24 +1,34 @@
 import './App.css';
 import { Provider } from 'react-redux';
-import store from './store.ts';
+import store from '../features/store/store.ts';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../pages/main';
 import Login from '../pages/login';
-import ProtectedRoute from './routes/protectedRoute.tsx';
+import ProtectedRoute from '../features/routes/protectedRoute.tsx';
 import Planet from '../pages/planet';
 import Starship from '../pages/starship';
+import { SnackbarProvider } from 'notistack';
+import { Container } from '@mui/material';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/planets" element={<Planet />} />
-          <Route path="/starships" element={<Starship />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <SnackbarProvider>
+          <Container maxWidth="xl">
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/planets" element={<Planet />} />
+                <Route path="/starships" element={<Starship />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </BrowserRouter>
+          </Container>
+        </SnackbarProvider>
+      </QueryClientProvider>
     </Provider>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../../widgets/header';
 import { Container } from '@mui/material';
+import FetchList from '../../features/api';
 
 const Starship = () => {
   return (
-    <Container maxWidth="">
+    <Container maxWidth="xl">
       <Header />
-      Starship
     </Container>
   );
 };

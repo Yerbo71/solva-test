@@ -6,7 +6,6 @@ const Planet = () => {
   return (
     <Container maxWidth="xl">
       <Header />
-      Planet
     </Container>
   );
 };
