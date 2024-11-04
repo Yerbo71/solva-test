@@ -31,7 +31,6 @@ const LoginForm = () => {
 
         } else {
             dispatch(loginFailure());
-            reset();
             alert("Неверный email или пароль");
         }
     };

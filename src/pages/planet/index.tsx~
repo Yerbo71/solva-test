@@ -1,13 +1,14 @@
+import React from 'react';
 import Header from '../../widgets/header';
 import { Container } from '@mui/material';
 
-const Main = () => {
+const Planet = () => {
   return (
-    <Container maxWidth="xl">
+    <Container>
       <Header />
-      People
+      Planet
     </Container>
   );
 };
 
-export default Main;
+export default Planet;

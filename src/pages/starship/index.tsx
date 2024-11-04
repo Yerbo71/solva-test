@@ -1,13 +1,14 @@
+import React from 'react';
 import Header from '../../widgets/header';
 import { Container } from '@mui/material';
 
-const Main = () => {
+const Starship = () => {
   return (
     <Container maxWidth="xl">
       <Header />
-      People
+      Starship
     </Container>
   );
 };
 
-export default Main;
+export default Starship;

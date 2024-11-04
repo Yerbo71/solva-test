@@ -1,11 +1,13 @@
-import React from 'react';
+import Header from '../../widgets/header';
+import { Container } from '@mui/material';
 
 const Main = () => {
-    return (
-        <div>
-            Main
-        </div>
-    );
+  return (
+    <Container>
+      <Header />
+      People
+    </Container>
+  );
 };
 
 export default Main;
