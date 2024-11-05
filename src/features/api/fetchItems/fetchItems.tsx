@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { FetchListData, FetchListProps } from './types.ts';
 
 const fetchItems = async <T extends 'people' | 'planets' | 'starships'>(
@@ -19,7 +19,7 @@ const FetchList = <T extends 'people' | 'planets' | 'starships'>({ type }: Fetch
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['items', type, page],
     queryFn: () => fetchItems(type, page),
-    keepPreviousData: true,
+    placeholderData: keepPreviousData,
   });
 
   const items: FetchListData<T> = data?.results || [];

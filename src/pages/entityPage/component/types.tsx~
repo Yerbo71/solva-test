@@ -1,0 +1,5 @@
+import { Person } from '../../../features/api/types.ts';
+import Planet from '../../planet';
+import Starship from '../../starship';
+
+export type Entity = Person | Planet | Starship;

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Card, CardContent, Typography } from '@mui/material';
-import { Person } from '../../features/api/types.ts';
-import Planet from '../../pages/planet';
-import Starship from '../../pages/starship';
+import { Person, Planet, Starship } from '../../features/api/fetchItems/types.ts';
 import { Link } from 'react-router-dom';
 
 export type Item = Person | Planet | Starship;

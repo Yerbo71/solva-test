@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux';
 import store from '../features/store/store.ts';
 import { SnackbarProvider } from 'notistack';
-import { Container } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AppRoutes from '../features/routes/appRoutes.tsx';
 

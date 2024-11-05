@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Card, CardContent, Typography } from '@mui/material';
-import { Person } from '../../features/api/types.ts';
-import Planet from '../../pages/planet';
-import Starship from '../../pages/starship';
+import { Person,Planet, Starship } from '../../features/api/fetchItems/types.ts';
 import { Link } from 'react-router-dom';
 
 export type Item = Person | Planet | Starship;
@@ -50,7 +48,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
             <Typography sx={{ color: 'text.secondary' }}>Climate: {data.climate}</Typography>
             <Typography sx={{ color: 'text.secondary' }}>Gravity: {data.gravity}</Typography>
             <Typography sx={{ color: 'text.secondary' }}>Population: {data.population}</Typography>
-            <Link to={'/people/' + data.url.split('/')[5]}>
+            <Link to={'/planets/' + data.url.split('/')[5]}>
               <Button variant="contained" color="primary" sx={{ mt: 2 }}>
                 Подробнее
               </Button>
@@ -70,7 +68,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>Cost: {data.cost_in_credits}</Typography>
             <Typography sx={{ color: 'text.secondary' }}>Passengers: {data.passengers}</Typography>
-            <Link to={'/people/' + data.url.split('/')[5]}>
+            <Link to={'/starships/' + data.url.split('/')[5]}>
               <Button variant="contained" color="primary" sx={{ mt: 2 }}>
                 Подробнее
               </Button>

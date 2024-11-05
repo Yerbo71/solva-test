@@ -1,13 +1,13 @@
 import Header from '../../widgets/header';
 import { Box, CircularProgress, Container, Pagination, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
-import FetchList from '../../features/api/fetchItems.tsx';
+import FetchList from '../../features/api/fetchItems/fetchItems.tsx';
 import ItemCard from '../../shared/itemCard';
 
 const Main = () => {
   const { items, page, totalPages, setPage, error, loading } = FetchList({ type: 'people' });
   const { enqueueSnackbar } = useSnackbar();
-  if (error) return enqueueSnackbar(error, { variant: 'error' });
+  if (error) return enqueueSnackbar(error);
   if (loading) return <CircularProgress />;
   return (
     <>
@@ -36,7 +36,7 @@ const Main = () => {
           <Pagination
             count={totalPages}
             page={page}
-            onChange={(event, value) => setPage(value)}
+            onChange={(value) => setPage(value)}
             color="primary"
             variant="outlined"
             shape="rounded"

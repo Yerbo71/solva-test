@@ -1,15 +1,17 @@
-import { TextField, Button, CircularProgress } from '@mui/material';
+import { Button, CircularProgress, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginStart, loginSuccess, loginFailure } from '../../../features/auth/authSlice';
+import { loginFailure, loginStart, loginSuccess } from '../../../features/auth/authSlice';
 import { mockUsers } from '../../../shared/mock';
 import { useNavigate } from 'react-router-dom';
 import { schema } from '../../../shared/validate';
+import { RootState } from '../../../features/store/store.ts';
+
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, isAuthenticated } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state: RootState) => state.auth);
   const {
     register,
     handleSubmit,
@@ -24,7 +26,7 @@ const LoginForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmitHandler = async (data) => {
+  const onSubmitHandler = async (data: { email: string; password: string }) => {
     dispatch(loginStart());
     const user = mockUsers.find(
       (user) => user.email === data.email && user.password === data.password,
