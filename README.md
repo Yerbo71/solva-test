@@ -15,9 +15,10 @@ First, clone the repository to your local machine:
 ### 2. yarn install
 ### 3. yarn dev
 
-### 3. Login
-Login: admin@mail.com
-Password: password123
+## Login
+
+##Login: admin@mail.com
+##Password: password123
 
 
 
