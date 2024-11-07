@@ -17,8 +17,8 @@ First, clone the repository to your local machine:
 
 ## Login
 
-##Login: admin@mail.com
-##Password: password123
+-Login: admin@mail.com
+-Password: password123
 
 
 
